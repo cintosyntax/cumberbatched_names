@@ -8,13 +8,10 @@ var nameGenerator = require('./cumberbatched_names.js');
 var app = express();
 
 app.get('/', function (req, res) {
-  var jsonPayload = {};
-
-  if (req.query.slack) {
-    jsonPayload["response_type"] = "in_channel";
-  }
-  
-  jsonPayload["text"] = nameGenerator.getName();
+  var jsonPayload = {
+    response_type: req.query["response_type"],
+    text: nameGenerator.getName()
+  };
 
   res.send(jsonPayload);
 });
